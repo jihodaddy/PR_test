@@ -12,6 +12,8 @@
 	</head>
 	<body>
 		<h3>상풍 등록</h3>
+		<h3>상풍 등록</h3> PR_test_kdy 수정완료
+		
 														
 		<form method="post" action="<c:url value='/product/insertProduct' />">
 			<table>
