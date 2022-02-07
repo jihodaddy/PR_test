@@ -15,12 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FileDownloadController {
-	//파일 다운로드 폼으로 이동: upload 폴더 안의 모든 파일 목록 출력
+	//�뙆�씪 �떎�슫濡쒕뱶 �뤌�쑝濡� �씠�룞: upload �뤃�뜑 �븞�쓽 紐⑤뱺 �뙆�씪 紐⑸줉 異쒕젰
 	@RequestMapping("/fileDownloadList")
 	public ModelAndView fileDownloadList() {
 		ModelAndView mv = new ModelAndView ();
 		
-		// c:\springWorkspace의 upload 폴더에 있는 전체 파일 목록 가져오기
+		// c:\springWorkspace�쓽 upload �뤃�뜑�뿉 �엳�뒗 �쟾泥� �뙆�씪 紐⑸줉 媛��졇�삤湲�
 		File path = new File("C:/springWorkspace/upload");
 		String[] fileList = path.list()	;
 		
@@ -29,28 +29,33 @@ public class FileDownloadController {
 		return mv;
 	}
 	
-	// 파일 다운로드 처리
+	// �뙆�씪 �떎�슫濡쒕뱶 泥섎━
 	@RequestMapping("/fileDownload/{file}")
 	public void fileDownload(@PathVariable String file,
 										HttpServletResponse response) throws IOException {
 			
 		File f = new File("C:/springWorkspace/upload" ,file);
 		
-		//file 다운로드 설정
+		//file �떎�슫濡쒕뱶 �꽕�젙
 		response.setContentType("application/download");
 		response.setContentLength((int)f.length());
 		response.setHeader("Content-Disposition", "attatchment;filename=\"" + file + "\"");
 		
-		//response 객체를 통해서 서버로부터 파일 다운로드
+		//response 媛앹껜瑜� �넻�빐�꽌 �꽌踰꾨줈遺��꽣 �뙆�씪 �떎�슫濡쒕뱶
 		OutputStream os = response.getOutputStream();
 		
-		//파일 입력 객체 생성
+		//�뙆�씪 �엯�젰 媛앹껜 �깮�꽦
 		FileInputStream fis = new FileInputStream(f);
 		FileCopyUtils.copy(fis, os);
 		
 		fis.close();
 		os.close();
 				
+	}
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "home";
 	}
 }
 
